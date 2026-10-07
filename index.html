@@ -216,11 +216,11 @@ var PRODUCTOS = [
   function conAncho(f){ return CARPETA_FOTOS + f + (f.indexOf('?') > -1 ? '&' : '?') + 'width=300'; }
 
   function track(nombre, params){
-    try{ if(window.gtag){ gtag('event', nombre, params || {}); } }catch(e){}
+    try{ if(window.gtag){ params = params || {}; params.pagina = 'como_tomar'; gtag('event', nombre, params); } }catch(e){}
   }
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
-    if(a){ track('click_whatsapp', {ubicacion: a.classList.contains('ask') ? 'pedir_dosis' : 'ayuda'}); }
+    if(a){ track('whatsapp_como_tomar', {ubicacion: a.classList.contains('ask') ? 'pedir_dosis' : 'ayuda'}); }
   });
 
   document.getElementById('waMain').href = wa('Hola, tengo una pregunta sobre cómo usar mi producto NextGen.');
@@ -258,7 +258,7 @@ var PRODUCTOS = [
 
     el.querySelector('.head').addEventListener('click', function(){
       toggle(el);
-      if(el.dataset.open === 'true'){ track('ver_producto', {item_id: p.id, item_name: p.nombre}); }
+      if(el.dataset.open === 'true'){ track('ver_como_tomar', {producto_id: p.id, producto_nombre: p.nombre}); }
     });
     return el;
   }
