@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo usar tu producto | NextGen Nutrition</title>
+<meta name="description" content="Mira cómo tomar tu producto NextGen Nutrition, paso a paso.">
+<meta name="theme-color" content="#0E2A14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#009B17;
+  --green-deep:#00710F;
+  --lime:#8BD63A;
+  --ink:#0E2A14;
+  --paper:#F4F8EE;
+  --card:#FFFFFF;
+  --line:#DCE7D0;
+  --muted:#4B5F50;
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+.hero{background:var(--ink);color:#fff;padding:44px 20px 40px}
+.hero-in{max-width:1040px;margin:0 auto}
+.brand{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:.02em;color:var(--lime)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(48px,11vw,92px);line-height:.95;margin-top:14px;max-width:11ch}
+.hero p{margin-top:16px;max-width:42ch;color:#D3E3CF;font-size:17px}
+
+main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
+@media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.grid{grid-template-columns:1fr 1fr 1fr}}
+
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.card[data-open="true"]{border-color:var(--green);box-shadow:0 8px 24px rgba(0,155,23,.12)}
+.head{width:100%;display:grid;grid-template-columns:84px 1fr 28px;gap:14px;padding:14px;align-items:center}
+.thumb{width:84px;height:84px;border-radius:12px;background:#EEF4E6;overflow:hidden;display:grid;place-items:center}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.thumb.empty{background:var(--lime);color:var(--ink);font-family:var(--display);font-weight:700;font-size:40px}
+.name{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.05}
+.dose{display:flex;align-items:baseline;gap:8px;margin-top:8px}
+.dose b{font-family:var(--display);font-weight:700;font-size:44px;line-height:.8;color:var(--green-deep)}
+.dose span{font-size:13px;color:var(--muted);line-height:1.25}
+.dose.soft span{font-weight:500;color:var(--green-deep)}
+.chev{width:28px;height:28px;border-radius:50%;background:var(--paper);display:grid;place-items:center;transition:transform .25s,background .2s}
+.chev svg{width:14px;height:14px;stroke:var(--ink);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card[data-open="true"] .chev{transform:rotate(180deg);background:var(--lime)}
+
+.panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.card[data-open="true"] .panel{grid-template-rows:1fr}
+.panel-in{overflow:hidden}
+.panel-body{padding:2px 16px 18px}
+.steps{list-style:none;border-left:4px solid var(--lime);padding-left:14px;display:grid;gap:12px;margin-top:4px}
+.steps li strong{display:block;font-size:15px;font-weight:600}
+.steps li span{font-size:14px;color:var(--muted)}
+.note{margin-top:14px;font-size:14px;background:var(--paper);border-radius:12px;padding:12px 14px}
+.ask{display:inline-block;margin-top:14px;font-size:14px;font-weight:600;color:var(--green-deep);text-underline-offset:3px}
+
+.foot{max-width:1040px;margin:0 auto;padding:28px 20px 56px}
+.help{background:var(--ink);color:#fff;border-radius:20px;padding:28px 24px;display:grid;gap:14px;justify-items:start}
+.help h2{font-family:var(--display);font-weight:700;font-size:34px;line-height:1}
+.help p{color:#D3E3CF;max-width:46ch}
+.wa{display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--ink);font-weight:600;padding:14px 22px;border-radius:999px;text-decoration:none;transition:transform .15s}
+.wa:hover{transform:translateY(-2px)}
+.wa svg{width:20px;height:20px;fill:currentColor}
+.legal{margin-top:18px;font-size:12.5px;color:var(--muted);max-width:70ch}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="brand">NextGen Nutrition</div>
+    <h1>Cómo tomar tu producto</h1>
+    <p>Toca la tarjeta de tu producto y mira la dosis exacta y el mejor momento para tomarlo.</p>
+  </div>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer class="foot">
+  <div class="help">
+    <h2>¿Tienes dudas?</h2>
+    <p>Escríbenos y te ayudamos con tu pedido, la dosis o cualquier pregunta sobre cómo usar tu producto.</p>
+    <a class="wa" id="waMain" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+  <p class="legal">Estos productos son suplementos y no reemplazan una alimentación variada ni un tratamiento médico. Si estás embarazada, en lactancia, tienes una condición de salud o tomas medicamentos, consulta primero con tu médico. No superes la dosis recomendada.</p>
+</footer>
+
+<script>
+/* ==========================================================================
+   AJUSTES GENERALES
+   ========================================================================== */
+var WHATSAPP = '573154115877';
+var CARPETA_FOTOS = 'https://suplementosnextgen.com/cdn/shop/files/';
+
+/* ==========================================================================
+   PRODUCTOS  (esto es lo único que tienes que editar)
+
+   Para agregar un producto nuevo: copia un bloque completo (de { a },),
+   pégalo al final de la lista y cambia los textos.
+
+   id        Nombre corto sin espacios ni tildes. Sirve para el enlace directo:
+             tupagina.com/#berberina-gotas abre esa tarjeta.
+   nombre    Cómo lo ve el cliente.
+   foto      Nombre del archivo de la foto en tu tienda (lo que va después de
+             /files/). Si lo dejas vacío, se muestra la inicial del producto.
+   numero    El número grande de la dosis (ej. '2'). Si no tienes la dosis,
+             déjalo vacío '' y se muestra "Sigue la dosis de la etiqueta".
+   unidad    Texto al lado del número (ej. 'cápsulas al día').
+   pasos     Lista de [título, detalle]. Puede estar vacía [].
+   nota      Un recordatorio corto debajo de los pasos.
+   ========================================================================== */
+var PRODUCTOS = [
+
+  {
+    id: 'berberina-capsulas',
+    nombre: 'Berberina en cápsulas',
+    foto: 'WhatsAppImage2025-10-15at13.24.36.webp?v=1776189712',
+    numero: '2',
+    unidad: 'cápsulas al día',
+    pasos: [
+      ['Antes del desayuno', '1 cápsula'],
+      ['Antes del almuerzo', '1 cápsula']
+    ],
+    nota: 'Tómalas con un vaso de agua, siempre antes de la comida.'
+  },
+
+  {
+    id: 'berberina-gotas',
+    nombre: 'Berberina en gotas',
+    foto: 'ChatGPTImage21jul2026_11_28_10a.m_11zon.webp?v=1784651331',
+    numero: '1',
+    unidad: 'gotero completo al día',
+    pasos: [
+      ['En la mañana', 'Medio gotero'],
+      ['En la noche', 'Medio gotero']
+    ],
+    nota: 'Puedes dividirlo en medio gotero en la mañana y medio en la noche. Tómalo sublingual (debajo de la lengua) o mezclado en un vaso con agua.'
+  },
+
+  {
+    id: 'peptonas-polvo',
+    nombre: 'Peptonas Glúteo Up en polvo',
+    foto: 'PEPTONAS_AGUAJE_FENOGRECO_EN_POLVO_SUPLEMENTOS_NEXT_GEN.webp?v=1775394772',
+    numero: '1',
+    unidad: 'scoop al día',
+    pasos: [
+      ['Si entrenas', 'Tómalo después del entrenamiento'],
+      ['Si no entrenas', 'Tómalo todos los días, a la hora que prefieras']
+    ],
+    nota: 'Mezcla 1 scoop en agua, jugo, batido o tu bebida favorita. La constancia es clave para ver resultados.'
+  },
+
+  {
+    id: 'peptonas-capsulas',
+    nombre: 'Peptonas + Aguaje + Fenogreco en cápsulas',
+    foto: '1769039221peptonasfondoblanco.webp?v=1777329598',
+    numero: '',
+    unidad: '',
+    pasos: [],
+    nota: ''
+  },
+
+  {
+    id: 'drenaje-linfatico',
+    nombre: 'Drenaje linfático',
+    foto: '',
+    numero: '',
+    unidad: '',
+    pasos: [],
+    nota: ''
+  },
+
+  {
+    id: 'magnesium-complex',
+    nombre: 'Magnesium complex',
+    foto: '',
+    numero: '',
+    unidad: '',
+    pasos: [],
+    nota: ''
+  }
+
+];
+
+/* ==========================================================================
+   A partir de aquí no hace falta tocar nada
+   ========================================================================== */
+(function(){
+  var gridEl = document.getElementById('grid');
+  var TEXTO_ETIQUETA = 'Sigue la dosis de la etiqueta de tu frasco';
+  var NOTA_ETIQUETA = 'Sigue la dosis indicada en la etiqueta de tu frasco. Si no la tienes a la mano, escríbenos y te la enviamos.';
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];}); }
+  function wa(text){ return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(text); }
+  function conAncho(f){ return CARPETA_FOTOS + f + (f.indexOf('?') > -1 ? '&' : '?') + 'width=300'; }
+
+  document.getElementById('waMain').href = wa('Hola, tengo una pregunta sobre cómo usar mi producto NextGen.');
+
+  function card(p){
+    var tieneDosis = !!p.numero;
+    var el = document.createElement('article');
+    el.className = 'card'; el.id = p.id; el.dataset.open = 'false';
+
+    var thumb = p.foto
+      ? '<div class="thumb"><img src="'+esc(conAncho(p.foto))+'" alt="'+esc(p.nombre)+'" loading="lazy" width="84" height="84"></div>'
+      : '<div class="thumb empty" aria-hidden="true">'+esc(p.nombre.charAt(0))+'</div>';
+
+    var dose = tieneDosis
+      ? '<div class="dose"><b>'+esc(p.numero)+'</b><span>'+esc(p.unidad)+'</span></div>'
+      : '<div class="dose soft"><span>'+TEXTO_ETIQUETA+'</span></div>';
+
+    var pasos = (p.pasos && p.pasos.length)
+      ? '<ul class="steps">'+p.pasos.map(function(s){return '<li><strong>'+esc(s[0])+'</strong><span>'+esc(s[1])+'</span></li>';}).join('')+'</ul>'
+      : '';
+
+    var nota = p.nota || (tieneDosis ? '' : NOTA_ETIQUETA);
+    var ask = tieneDosis ? '' : '<a class="ask" target="_blank" rel="noopener" href="'+wa('Hola, necesito la forma de uso de: '+p.nombre)+'">Pedir la dosis por WhatsApp</a>';
+
+    el.innerHTML =
+      '<button class="head" type="button" aria-expanded="false" aria-controls="'+esc(p.id)+'-panel">'+
+        thumb+
+        '<div><div class="name">'+esc(p.nombre)+'</div>'+dose+'</div>'+
+        '<span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>'+
+      '</button>'+
+      '<div class="panel" id="'+esc(p.id)+'-panel"><div class="panel-in"><div class="panel-body">'+
+        pasos+
+        (nota ? '<p class="note">'+esc(nota)+'</p>' : '')+ask+
+      '</div></div></div>';
+
+    el.querySelector('.head').addEventListener('click', function(){ toggle(el); });
+    return el;
+  }
+
+  function toggle(el, force){
+    var open = typeof force === 'boolean' ? force : el.dataset.open !== 'true';
+    el.dataset.open = open ? 'true' : 'false';
+    el.querySelector('.head').setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  PRODUCTOS.forEach(function(p){ gridEl.appendChild(card(p)); });
+
+  function abrirDesdeEnlace(){
+    var id = decodeURIComponent(location.hash.slice(1));
+    if(!id) return;
+    var el = document.getElementById(id);
+    if(el && el.classList.contains('card')){
+      toggle(el, true);
+      setTimeout(function(){ el.scrollIntoView({behavior:'smooth', block:'start'}); }, 50);
+    }
+  }
+  window.addEventListener('hashchange', abrirDesdeEnlace);
+  abrirDesdeEnlace();
+})();
+</script>
+</body>
+</html>
