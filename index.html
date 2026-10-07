@@ -77,6 +77,14 @@ main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<!-- Google Analytics (mismo flujo de datos de suplementosnextgen.com) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEWPQXDYVS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-GEWPQXDYVS');
+</script>
 </head>
 <body>
 
@@ -207,6 +215,14 @@ var PRODUCTOS = [
   function wa(text){ return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(text); }
   function conAncho(f){ return CARPETA_FOTOS + f + (f.indexOf('?') > -1 ? '&' : '?') + 'width=300'; }
 
+  function track(nombre, params){
+    try{ if(window.gtag){ gtag('event', nombre, params || {}); } }catch(e){}
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+    if(a){ track('click_whatsapp', {ubicacion: a.classList.contains('ask') ? 'pedir_dosis' : 'ayuda'}); }
+  });
+
   document.getElementById('waMain').href = wa('Hola, tengo una pregunta sobre cómo usar mi producto NextGen.');
 
   function card(p){
@@ -240,7 +256,10 @@ var PRODUCTOS = [
         (nota ? '<p class="note">'+esc(nota)+'</p>' : '')+ask+
       '</div></div></div>';
 
-    el.querySelector('.head').addEventListener('click', function(){ toggle(el); });
+    el.querySelector('.head').addEventListener('click', function(){
+      toggle(el);
+      if(el.dataset.open === 'true'){ track('ver_producto', {item_id: p.id, item_name: p.nombre}); }
+    });
     return el;
   }
 
