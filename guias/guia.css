@@ -141,3 +141,34 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
   .producto .foto{width:88px;height:88px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Migas de pan, resumen, acciones del hero, barra fija en móvil */
+.migas{max-width:760px;margin:0 auto;padding:12px 20px 10px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.migas a{color:var(--muted)}
+.migas a:hover{color:var(--green-deep)}
+.migas [aria-current]{color:var(--ink);font-weight:500}
+.resumen ul{margin:8px 0 0 20px}
+.resumen li{font-size:16px;margin-top:6px}
+.hero-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hbtn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:999px;font:inherit;font-weight:600;font-size:15px;line-height:1.2;text-decoration:none;text-align:center;background:var(--lime);color:var(--ink);border:1.5px solid var(--lime);cursor:pointer}
+.hbtn:hover{filter:brightness(1.05)}
+.hbtn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.hbtn.ghost:hover{background:rgba(255,255,255,.1)}
+.botones .btn{font:inherit;font-weight:600;font-size:14.5px;cursor:pointer;text-align:center}
+.fijo{display:none}
+@media(max-width:700px){
+  .fijo{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(14,42,20,.1);transition:transform .25s}
+  .fijo.oculto{transform:translateY(120%)}
+  .fijo a{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none}
+  .fijo .f1{flex:1;background:var(--green-deep);color:#fff}
+  .fijo .f2{flex:none;padding:0 18px;background:var(--lime);color:var(--ink)}
+  body{padding-bottom:76px}
+}
+
+/* Tarjetas de guía en el índice */
+.guia-card{display:grid;gap:6px;padding:18px}
+.guia-card h3{margin-top:0;font-size:26px}
+.guia-card h3 a{text-decoration:none;color:var(--ink)}
+.guia-card h3 a:hover{color:var(--green-deep);text-decoration:underline}
+.guia-card span{font-size:15px;color:var(--muted);margin-top:0}
+.guia-card .meta{font-size:13.5px}
