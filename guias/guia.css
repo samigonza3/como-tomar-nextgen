@@ -1,0 +1,143 @@
+/* Estilos compartidos de las guías de NextGen Nutrition.
+   Usan los mismos colores y tipografías de la página "Cómo usar tu producto". */
+:root{
+  --green:#009B17;
+  --green-deep:#00710F;
+  --lime:#8BD63A;
+  --ink:#0E2A14;
+  --paper:#F4F8EE;
+  --card:#FFFFFF;
+  --line:#DCE7D0;
+  --muted:#4B5F50;
+  --warn-bg:#FFF6E0;
+  --warn-line:#F0D590;
+  --warn-ink:#6B4A00;
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:var(--green-deep);text-underline-offset:3px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+/* Barra superior */
+.topbar{background:#fff;border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo img{height:36px;width:auto}
+.topbar .volver{font-size:14px;font-weight:600;text-decoration:underline}
+
+/* Portada */
+.hero{background:var(--ink);color:#fff;padding:40px 20px 36px}
+.hero-in{max-width:760px;margin:0 auto}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tag{font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;background:rgba(139,214,58,.16);color:var(--lime)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,9vw,66px);line-height:.98;max-width:17ch}
+.hero p{margin-top:18px;max-width:52ch;color:#D3E3CF;font-size:18px}
+
+/* Índice fijo */
+.indice{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+.indice-in{max-width:760px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:12px 20px;scrollbar-width:none}
+.indice-in::-webkit-scrollbar{display:none}
+.indice a{flex:none;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:500;color:var(--muted);text-decoration:none}
+.indice a:hover{border-color:var(--green);color:var(--green-deep)}
+
+/* Lectura */
+article{max-width:760px;margin:0 auto;padding:0 20px 8px}
+.parte{padding-top:44px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(32px,6vw,44px);line-height:1;color:var(--ink)}
+h3{font-family:var(--display);font-weight:600;font-size:24px;line-height:1.1;margin-top:26px}
+p{font-size:17px;margin-top:14px;max-width:66ch}
+strong{font-weight:600}
+.sub{color:var(--muted);font-size:15px}
+
+/* Recuadros */
+.callout{margin-top:22px;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--lime);border-radius:14px;padding:16px 18px}
+.callout p{margin-top:0;font-size:16px}
+.callout p+p{margin-top:10px}
+.callout b{display:block;font-family:var(--display);font-weight:700;font-size:22px;line-height:1.1;margin-bottom:6px;color:var(--green-deep)}
+.alerta{background:var(--warn-bg);border-color:var(--warn-line);border-left-color:#E0A21A}
+.alerta b{color:var(--warn-ink)}
+
+/* Pasos en secuencia */
+.pasos{list-style:none;counter-reset:paso;margin-top:22px;display:grid;gap:14px}
+.pasos li{counter-increment:paso;position:relative;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:16px 18px 16px 62px}
+.pasos li::before{content:counter(paso);position:absolute;left:16px;top:14px;width:34px;height:34px;border-radius:50%;background:var(--lime);color:var(--ink);font-family:var(--display);font-weight:700;font-size:22px;display:grid;place-items:center;line-height:1}
+.pasos strong{display:block;font-size:17px}
+.pasos span{display:block;margin-top:4px;font-size:15.5px;color:var(--muted)}
+
+/* Tarjetas */
+.tarjetas{margin-top:22px;display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.tarjetas{grid-template-columns:1fr 1fr}}
+.tarjeta{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+.tarjeta strong{display:block;font-size:16px}
+.tarjeta span{display:block;margin-top:3px;font-size:14.5px;color:var(--muted)}
+
+/* Cifras */
+.cifras{margin-top:22px;display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.cifras{grid-template-columns:repeat(3,1fr)}}
+.cifra{background:var(--ink);color:#fff;border-radius:16px;padding:18px}
+.cifra b{display:block;font-family:var(--display);font-weight:700;font-size:44px;line-height:.9;color:var(--lime)}
+.cifra span{display:block;margin-top:8px;font-size:14.5px;color:#D3E3CF}
+
+/* Tablas */
+.tabla-wrap{margin-top:22px;overflow-x:auto;border:1.5px solid var(--line);border-radius:16px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600;font-size:18px;background:#EEF4E6}
+tr:last-child td{border-bottom:0}
+
+/* Preguntas y ejercicios desplegables */
+details{margin-top:12px;background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+details[open]{border-color:var(--green)}
+summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:600;font-size:17px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";flex:none;width:12px;height:12px;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg);margin-top:-4px;transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.detalle{padding:0 18px 18px}
+.detalle p:first-child{margin-top:0}
+.detalle .pasos{margin-top:14px}
+.detalle .pasos li{border-radius:12px;padding:12px 14px 12px 56px;background:var(--paper)}
+.detalle .pasos li::before{left:12px;top:10px;width:32px;height:32px;font-size:20px}
+
+/* Producto recomendado */
+.producto{margin-top:26px;background:#fff;border:1.5px solid var(--green);border-radius:20px;padding:18px;display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;box-shadow:0 8px 24px rgba(0,155,23,.1)}
+.producto .foto{width:96px;height:96px;border-radius:14px;background:#EEF4E6;overflow:hidden}
+.producto .foto img{width:100%;height:100%;object-fit:contain}
+.producto h3{margin-top:0;font-size:26px}
+.producto p{margin-top:4px;font-size:15px;color:var(--muted)}
+.botones{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:11px 18px;border-radius:999px;font-weight:600;font-size:14.5px;text-decoration:none;border:1.5px solid var(--green-deep);color:var(--green-deep);background:#fff}
+.btn.lleno{background:var(--green-deep);color:#fff}
+.btn:hover{background:var(--green);border-color:var(--green);color:#fff}
+
+/* Cierre */
+.cierre{max-width:760px;margin:0 auto;padding:36px 20px 8px}
+.cta-big{display:grid;gap:2px;justify-items:center;text-align:center;padding:22px 20px;border-radius:20px;background:var(--green-deep);color:#fff;text-decoration:none;transition:background .15s,transform .15s}
+.cta-big:hover{background:var(--green);transform:translateY(-2px)}
+.cta-big b{font-family:var(--display);font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1}
+.cta-big span{font-size:14px;color:#D9F2D0}
+.guias-hermanas{margin-top:26px}
+.guias-hermanas h2{font-size:30px}
+.legal{margin-top:20px;font-size:12.5px;color:var(--muted);max-width:70ch}
+.fuentes{margin-top:18px;font-size:13px;color:var(--muted)}
+.fuentes a{display:block;margin-top:6px;font-size:13px}
+
+.site-foot{margin-top:36px;background:#fff;border-top:1px solid var(--line)}
+.site-foot-in{max-width:1040px;margin:0 auto;padding:24px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px}
+.site-foot .logo img{height:32px}
+.site-foot p{font-size:13px;color:var(--muted);margin:0}
+.site-foot a.shop{font-weight:600}
+
+@media(max-width:560px){
+  table{min-width:0;font-size:13.5px}
+  th,td{padding:10px 8px}
+  th{font-size:16px}
+}
+@media(max-width:420px){
+  .producto{grid-template-columns:1fr}
+  .producto .foto{width:88px;height:88px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}

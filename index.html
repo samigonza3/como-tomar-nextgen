@@ -77,6 +77,12 @@ main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+.guia-link{display:flex;align-items:center;gap:8px;padding:10px 16px 12px;border-top:1px solid var(--line);font-size:13px;font-weight:500;color:var(--muted);text-decoration:none}
+.guia-link svg{width:15px;height:15px;flex:none;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.guia-link span{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.guia-link:hover{color:var(--green-deep)}
+.guia-link:hover span{text-decoration-color:currentColor}
+
 /* Barra superior y footer con logo */
 .topbar{background:#fff;border-bottom:1px solid var(--line)}
 .topbar-in{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -171,6 +177,9 @@ var CARPETA_FOTOS = 'https://suplementosnextgen.com/cdn/shop/files/';
    unidad    Texto al lado del número (ej. 'cápsulas al día').
    pasos     Lista de [título, detalle]. Puede estar vacía [].
    nota      Un recordatorio corto debajo de los pasos.
+   guia      (Opcional) Botón pequeño bajo la ficha que lleva a una guía.
+             Ejemplo: guia: { texto: 'Guía gratuita: tu tema', url: '/guias/tu-guia/' }
+             Si no tiene guía, simplemente no pongas este campo.
    ========================================================================== */
 var PRODUCTOS = [
 
@@ -184,7 +193,8 @@ var PRODUCTOS = [
       ['Antes del desayuno', '1 cápsula'],
       ['Antes del almuerzo', '1 cápsula']
     ],
-    nota: 'Tómalas con un vaso de agua, siempre antes de la comida.'
+    nota: 'Tómalas con un vaso de agua, siempre antes de la comida.',
+    guia: { texto: 'Guía gratuita: resistencia a la insulina', url: '/guias/resistencia-insulina/' }
   },
 
   {
@@ -197,7 +207,8 @@ var PRODUCTOS = [
       ['En la mañana', 'Medio gotero'],
       ['En la noche', 'Medio gotero']
     ],
-    nota: 'Puedes dividirlo en medio gotero en la mañana y medio en la noche. Tómalo sublingual (debajo de la lengua) o mezclado en un vaso con agua.'
+    nota: 'Puedes dividirlo en medio gotero en la mañana y medio en la noche. Tómalo sublingual (debajo de la lengua) o mezclado en un vaso con agua.',
+    guia: { texto: 'Guía gratuita: diabetes y erección', url: '/guias/diabetes-y-ereccion/' }
   },
 
   {
@@ -209,7 +220,8 @@ var PRODUCTOS = [
     pasos: [
       ['Antes de entrenar', '1 cápsula']
     ],
-    nota: 'Tómala antes de entrenar.'
+    nota: 'Tómala antes de entrenar.',
+    guia: { texto: 'Guía gratuita: ejercicios de glúteos', url: '/guias/ejercicios-gluteos/' }
   },
 
   {
@@ -257,6 +269,8 @@ var PRODUCTOS = [
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
     if(a){ track('whatsapp_como_tomar', {ubicacion: a.classList.contains('ask') ? 'pedir_dosis' : 'ayuda'}); }
+    var g = e.target.closest && e.target.closest('a.guia-link');
+    if(g){ track('ver_guia_como_tomar', {producto_id: g.getAttribute('data-guia')}); }
     var t = e.target.closest && e.target.closest('a[href^="https://suplementosnextgen.com"]');
     if(t){ track('ir_catalogo_como_tomar', {ubicacion: t.getAttribute('data-loc') || 'otro'}); }
   });
@@ -280,6 +294,10 @@ var PRODUCTOS = [
       ? '<ul class="steps">'+p.pasos.map(function(s){return '<li><strong>'+esc(s[0])+'</strong><span>'+esc(s[1])+'</span></li>';}).join('')+'</ul>'
       : '';
 
+    var guia = (p.guia && p.guia.url)
+      ? '<a class="guia-link" href="'+esc(p.guia.url)+'" data-guia="'+esc(p.id)+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg><span>'+esc(p.guia.texto || 'Guía gratuita')+'</span></a>'
+      : '';
+
     var nota = p.nota || (tieneDosis ? '' : NOTA_ETIQUETA);
     var ask = tieneDosis ? '' : '<a class="ask" target="_blank" rel="noopener" href="'+wa('Hola, necesito la forma de uso de: '+p.nombre)+'">Pedir la dosis por WhatsApp</a>';
 
@@ -292,7 +310,7 @@ var PRODUCTOS = [
       '<div class="panel" id="'+esc(p.id)+'-panel"><div class="panel-in"><div class="panel-body">'+
         pasos+
         (nota ? '<p class="note">'+esc(nota)+'</p>' : '')+ask+
-      '</div></div></div>';
+      '</div></div></div>'+guia;
 
     el.querySelector('.head').addEventListener('click', function(){
       toggle(el);
