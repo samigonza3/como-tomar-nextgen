@@ -76,6 +76,24 @@ main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
 .legal{margin-top:18px;font-size:12.5px;color:var(--muted);max-width:70ch}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Barra superior y footer con logo */
+.topbar{background:#fff;border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo img{height:36px;width:auto}
+.topbar .shop{font-size:14px;font-weight:600;color:var(--green-deep);text-decoration:underline;text-underline-offset:3px}
+
+/* Botón grande al catálogo */
+.cta-big{display:grid;gap:2px;justify-items:center;text-align:center;margin-top:14px;padding:22px 20px;border-radius:20px;background:var(--green-deep);color:#fff;text-decoration:none;transition:background .15s,transform .15s}
+.cta-big:hover{background:var(--green);transform:translateY(-2px)}
+.cta-big b{font-family:var(--display);font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1}
+.cta-big span{font-size:14px;color:#D9F2D0}
+
+.site-foot{background:#fff;border-top:1px solid var(--line)}
+.site-foot-in{max-width:1040px;margin:0 auto;padding:24px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px}
+.site-foot .logo img{height:32px}
+.site-foot p{font-size:13px;color:var(--muted)}
+.site-foot a.shop{font-weight:600;color:var(--green-deep);text-underline-offset:3px}
 </style>
 <!-- Google Analytics (mismo flujo de datos de suplementosnextgen.com) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEWPQXDYVS"></script>
@@ -87,6 +105,13 @@ main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
 </script>
 </head>
 <body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="logo" href="https://suplementosnextgen.com/" data-loc="barra_superior" aria-label="NextGen Nutrition, ir a la tienda"><img src="logo.png" alt="NextGen Nutrition" width="97" height="36"></a>
+    <a class="shop" href="https://suplementosnextgen.com/" data-loc="barra_superior">Ir a la tienda</a>
+  </div>
+</div>
 
 <header class="hero">
   <div class="hero-in">
@@ -100,7 +125,7 @@ main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
   <div class="grid" id="grid"></div>
 </main>
 
-<footer class="foot">
+<section class="foot">
   <div class="help">
     <h2>¿Tienes dudas?</h2>
     <p>Escríbenos y te ayudamos con tu pedido, la dosis o cualquier pregunta sobre cómo usar tu producto.</p>
@@ -109,7 +134,18 @@ main{max-width:1040px;margin:0 auto;padding:24px 20px 8px}
       Escribir por WhatsApp
     </a>
   </div>
+  <a class="cta-big" href="https://suplementosnextgen.com/" data-loc="boton_grande">
+    <b>Ver el catálogo completo</b>
+    <span>Ir a suplementosnextgen.com</span>
+  </a>
   <p class="legal">Estos productos son suplementos y no reemplazan una alimentación variada ni un tratamiento médico. Si estás embarazada, en lactancia, tienes una condición de salud o tomas medicamentos, consulta primero con tu médico. No superes la dosis recomendada.</p>
+</section>
+
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <a class="logo" href="https://suplementosnextgen.com/" data-loc="footer" aria-label="NextGen Nutrition, ir a la tienda"><img src="logo.png" alt="NextGen Nutrition" width="86" height="32" loading="lazy"></a>
+    <p>© 2026 NextGen Nutrition · <a class="shop" href="https://suplementosnextgen.com/" data-loc="footer">suplementosnextgen.com</a></p>
+  </div>
 </footer>
 
 <script>
@@ -221,6 +257,8 @@ var PRODUCTOS = [
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
     if(a){ track('whatsapp_como_tomar', {ubicacion: a.classList.contains('ask') ? 'pedir_dosis' : 'ayuda'}); }
+    var t = e.target.closest && e.target.closest('a[href^="https://suplementosnextgen.com"]');
+    if(t){ track('ir_catalogo_como_tomar', {ubicacion: t.getAttribute('data-loc') || 'otro'}); }
   });
 
   document.getElementById('waMain').href = wa('Hola, tengo una pregunta sobre cómo usar mi producto NextGen.');
