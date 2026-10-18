@@ -157,6 +157,17 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
   table{font-size:13.5px} th,td{padding:10px 8px} th{font-size:16px}
 }
 
+/* ---- Banner de minijuegos ---- */
+.games-banner{background:var(--ink);padding:20px}
+.games-banner-in{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.games-emoji{font-size:36px;flex:none;line-height:1}
+.games-text{flex:1;min-width:160px}
+.games-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:2px}
+.games-title{font-family:var(--display);font-weight:700;font-size:22px;color:#fff;line-height:1.1}
+.games-desc{font-size:13px;color:#9EC99E;margin-top:3px}
+.games-cta{flex:none;display:inline-block;background:var(--lime);color:var(--ink);font-family:var(--display);font-weight:700;font-size:17px;padding:10px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .15s}
+.games-cta:hover{background:#a3f046;transform:translateY(-2px)}
+
 /* ---- Banner de referidos ---- */
 .ref-banner{background:var(--lime);padding:44px 20px}
 .ref-banner-in{max-width:1040px;margin:0 auto;display:grid;gap:12px;justify-items:start}
@@ -301,6 +312,21 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
     <span>Ir a suplementosnextgen.com</span>
   </a>
   <p class="legal">Estos productos son suplementos y no reemplazan una alimentación variada ni un tratamiento médico. Si estás embarazada, en lactancia, tienes una condición de salud o tomas medicamentos, consulta primero con tu médico. No superes la dosis recomendada.</p>
+</section>
+
+<!-- =====================================================================
+     BANNER MINIJUEGOS
+     ===================================================================== -->
+<section class="games-banner" aria-label="Minijuegos NextGen">
+  <div class="games-banner-in">
+    <div class="games-emoji" aria-hidden="true">🐛</div>
+    <div class="games-text">
+      <p class="games-label">Minijuegos</p>
+      <p class="games-title">Gusanito de Berberina</p>
+      <p class="games-desc">Come cápsulas verdes y rompe tu récord. ¡Juega gratis!</p>
+    </div>
+    <a class="games-cta" href="/juegos/" data-loc="banner_juegos">Jugar ahora →</a>
+  </div>
 </section>
 
 <footer class="site-foot">

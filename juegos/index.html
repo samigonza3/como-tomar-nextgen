@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minijuegos NextGen · Come cápsulas de berberina</title>
+<meta name="description" content="Juega el gusanito de berberina NextGen. ¡Come todas las cápsulas verdes y rompe tu récord!">
+<meta name="theme-color" content="#0E2A14">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://como-tomar.suplementosnextgen.com/juegos/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NextGen Nutrition">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="Gusanito de Berberina · NextGen">
+<meta property="og:description" content="¡Come todas las cápsulas verdes de berberina y rompe tu récord!">
+<meta property="og:url" content="https://como-tomar.suplementosnextgen.com/juegos/">
+<meta property="og:image" content="https://como-tomar.suplementosnextgen.com/nextgen-nutrition-como-tomar-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEWPQXDYVS"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GEWPQXDYVS');</script>
+<style>
+:root{
+  --green:#009B17;
+  --green-deep:#00710F;
+  --lime:#8BD63A;
+  --ink:#0E2A14;
+  --paper:#F4F8EE;
+  --card:#FFFFFF;
+  --line:#DCE7D0;
+  --muted:#4B5F50;
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100dvh;display:flex;flex-direction:column}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+/* Topbar */
+.topbar{background:#fff;border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo img{height:36px;width:auto}
+.topbar .back{font-size:14px;font-weight:600;color:var(--green-deep);text-decoration:none;display:flex;align-items:center;gap:6px}
+.topbar .back svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* Hero */
+.hero{background:var(--ink);color:#fff;padding:36px 20px 32px;text-align:center}
+.hero-in{max-width:640px;margin:0 auto}
+.label{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:8px}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,9vw,68px);line-height:.95;margin-bottom:10px}
+.hero p{color:#D3E3CF;font-size:15px;max-width:38ch;margin:0 auto}
+
+/* Game area */
+.game-wrap{flex:1;display:flex;flex-direction:column;align-items:center;padding:28px 16px 40px;gap:16px}
+
+.scoreboard{display:flex;gap:24px;align-items:center;justify-content:center;flex-wrap:wrap}
+.score-box{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 20px;text-align:center;min-width:90px}
+.score-box .label-s{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.score-box .num{font-family:var(--display);font-size:32px;font-weight:700;color:var(--ink);line-height:1}
+
+/* Canvas container */
+.canvas-box{position:relative;background:var(--ink);border-radius:14px;overflow:hidden;box-shadow:0 4px 32px rgba(14,42,20,.28);border:2px solid var(--green-deep)}
+canvas{display:block;image-rendering:pixelated}
+
+/* Overlay (start / game over) */
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(14,42,20,.82);backdrop-filter:blur(2px)}
+.overlay.hidden{display:none}
+.overlay h2{font-family:var(--display);font-size:clamp(28px,7vw,48px);font-weight:700;color:#fff;text-align:center;line-height:1}
+.overlay p{color:#D3E3CF;font-size:14px;text-align:center;max-width:26ch}
+.btn-play{background:var(--lime);color:var(--ink);font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.03em;border-radius:50px;padding:12px 40px;border:0;cursor:pointer;transition:background .15s,transform .1s}
+.btn-play:hover{background:#a3f046}
+.btn-play:active{transform:scale(.97)}
+.hi-score-msg{color:var(--lime);font-size:13px;font-weight:600}
+
+/* Mobile D-pad */
+.dpad{display:none;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px;justify-content:center}
+.dpad button{background:var(--card);border:1.5px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.dpad button:active{background:var(--line)}
+.dpad .d-up{grid-column:2}
+.dpad .d-left{grid-column:1;grid-row:2}
+.dpad .d-center{grid-column:2;grid-row:2;font-size:13px;font-weight:700;color:var(--muted)}
+.dpad .d-right{grid-column:3;grid-row:2}
+.dpad .d-down{grid-column:2;grid-row:3}
+
+@media(max-width:600px){
+  .dpad{display:grid}
+}
+
+/* Tip */
+.tip{font-size:13px;color:var(--muted);text-align:center;max-width:34ch}
+
+/* Footer */
+.site-foot{background:var(--ink);color:#D3E3CF;padding:20px;margin-top:auto}
+.site-foot-in{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.site-foot a{color:var(--lime);text-decoration:underline;text-underline-offset:3px}
+.site-foot p{font-size:13px}
+.logo-f img{height:28px;width:auto;filter:brightness(0) invert(1)}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<header class="topbar" role="banner">
+  <div class="topbar-in">
+    <a class="logo" href="/" aria-label="NextGen Nutrition, inicio">
+      <img src="/nextgen-nutrition-logo.png" alt="NextGen Nutrition" width="86" height="32" loading="eager">
+    </a>
+    <a class="back" href="/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver al inicio
+    </a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" aria-labelledby="game-title">
+  <div class="hero-in">
+    <p class="label">Minijuegos NextGen</p>
+    <h1 id="game-title">Gusanito<br>de Berberina</h1>
+    <p>Come todas las cápsulas verdes y ayuda al gusanito a crecer. ¡Rompe tu récord!</p>
+  </div>
+</section>
+
+<!-- Game -->
+<main class="game-wrap">
+
+  <!-- Scoreboard -->
+  <div class="scoreboard" aria-live="polite" aria-atomic="true">
+    <div class="score-box">
+      <div class="label-s">Puntaje</div>
+      <div class="num" id="scoreDisplay">0</div>
+    </div>
+    <div class="score-box">
+      <div class="label-s">Récord</div>
+      <div class="num" id="hiDisplay">0</div>
+    </div>
+    <div class="score-box">
+      <div class="label-s">Nivel</div>
+      <div class="num" id="levelDisplay">1</div>
+    </div>
+  </div>
+
+  <!-- Canvas -->
+  <div class="canvas-box" id="canvasBox">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Start overlay -->
+    <div class="overlay" id="overlay">
+      <h2 id="overlayTitle">🐛 ¡Listo<br>para jugar!</h2>
+      <p id="overlayMsg">Usa las flechas del teclado o el D-pad para mover el gusanito.</p>
+      <button class="btn-play" id="btnPlay">Jugar</button>
+      <p class="hi-score-msg" id="hiScoreMsg"></p>
+    </div>
+  </div>
+
+  <!-- D-pad (mobile) -->
+  <div class="dpad" role="group" aria-label="Control de dirección">
+    <button class="d-up" aria-label="Arriba" id="dUp">▲</button>
+    <button class="d-left" aria-label="Izquierda" id="dLeft">◀</button>
+    <div class="d-center">D-PAD</div>
+    <button class="d-right" aria-label="Derecha" id="dRight">▶</button>
+    <button class="d-down" aria-label="Abajo" id="dDown">▼</button>
+  </div>
+
+  <p class="tip">💊 Cada cápsula de berberina te da <strong>10 puntos</strong>. ¡El gusanito acelera con cada nivel!</p>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <a class="logo-f" href="https://suplementosnextgen.com/" aria-label="NextGen Nutrition">
+      <img src="/nextgen-nutrition-logo.png" alt="NextGen Nutrition" width="86" height="32" loading="lazy">
+    </a>
+    <p>© 2026 NextGen Nutrition · <a href="https://suplementosnextgen.com/">suplementosnextgen.com</a></p>
+  </div>
+</footer>
+
+<script>
+/* ===== CONFIG ===== */
+const CELL = 20;        // px por celda
+const COLS = 20;        // columnas
+const ROWS = 20;        // filas
+const BASE_SPEED = 150; // ms entre ticks (nivel 1)
+const SPEED_STEP = 8;   // ms que se resta por nivel
+const POINTS_PER_FOOD = 10;
+const LEVEL_UP_EVERY = 5; // cápsulas para subir de nivel
+
+/* ===== STATE ===== */
+let snake, dir, nextDir, food, score, hiScore, level, eating, loop, running, paused;
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const overlay = document.getElementById('overlay');
+const overlayTitle = document.getElementById('overlayTitle');
+const overlayMsg = document.getElementById('overlayMsg');
+const btnPlay = document.getElementById('btnPlay');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const hiDisplay = document.getElementById('hiDisplay');
+const levelDisplay = document.getElementById('levelDisplay');
+const hiScoreMsg = document.getElementById('hiScoreMsg');
+
+/* ===== CANVAS SIZE ===== */
+function setCanvasSize(){
+  const vw = window.innerWidth || document.documentElement.clientWidth || 360;
+  const max = Math.min(Math.max(vw - 32, 280), 420);
+  const size = Math.floor(max / CELL) * CELL;
+  canvas.width = size;
+  canvas.height = size;
+  canvas.style.width = size + 'px';
+  canvas.style.height = size + 'px';
+}
+setCanvasSize();
+
+function cols(){ return Math.floor(canvas.width / CELL); }
+function rows(){ return Math.floor(canvas.height / CELL); }
+
+/* ===== HI SCORE ===== */
+function loadHi(){
+  try{ return parseInt(localStorage.getItem('ng_snake_hi')||'0',10)||0; }catch(e){ return 0; }
+}
+function saveHi(v){
+  try{ localStorage.setItem('ng_snake_hi', v); }catch(e){}
+}
+
+/* ===== INIT ===== */
+function init(){
+  const c = cols(), r = rows();
+  const mx = Math.floor(c/2), my = Math.floor(r/2);
+  snake = [{x:mx,y:my},{x:mx-1,y:my},{x:mx-2,y:my}];
+  dir = {x:1,y:0};
+  nextDir = {x:1,y:0};
+  score = 0;
+  level = 1;
+  eating = 0;
+  running = false;
+  paused = false;
+  hiScore = loadHi();
+  updateUI();
+  spawnFood();
+  draw();
+}
+
+/* ===== FOOD ===== */
+function spawnFood(){
+  const c = cols(), r = rows();
+  let pos;
+  do {
+    pos = {x: Math.floor(Math.random()*c), y: Math.floor(Math.random()*r)};
+  } while(snake.some(s=>s.x===pos.x&&s.y===pos.y));
+  food = pos;
+}
+
+/* ===== GAME LOOP ===== */
+function start(){
+  if(running) return;
+  running = true;
+  overlay.classList.add('hidden');
+  tick();
+}
+
+function tick(){
+  if(!running) return;
+  loop = setTimeout(tick, Math.max(60, BASE_SPEED - (level-1)*SPEED_STEP));
+  update();
+  draw();
+}
+
+function update(){
+  dir = nextDir;
+  const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+  const c = cols(), r = rows();
+
+  // Wall collision
+  if(head.x<0||head.x>=c||head.y<0||head.y>=r){
+    gameOver(); return;
+  }
+  // Self collision
+  if(snake.some(s=>s.x===head.x&&s.y===head.y)){
+    gameOver(); return;
+  }
+
+  snake.unshift(head);
+
+  if(head.x===food.x && head.y===food.y){
+    score += POINTS_PER_FOOD;
+    eating++;
+    if(eating % LEVEL_UP_EVERY === 0) level++;
+    if(score > hiScore){ hiScore = score; saveHi(hiScore); }
+    updateUI();
+    spawnFood();
+  } else {
+    snake.pop();
+  }
+}
+
+function gameOver(){
+  running = false;
+  clearTimeout(loop);
+  overlayTitle.textContent = '💀 Game Over';
+  overlayMsg.textContent = `Comiste ${eating} cápsula${eating!==1?'s':''} de berberina.`;
+  btnPlay.textContent = 'Volver a jugar';
+  hiScoreMsg.textContent = score >= hiScore && score > 0 ? '🏆 ¡Nuevo récord!' : `Récord: ${hiScore} pts`;
+  overlay.classList.remove('hidden');
+}
+
+/* ===== UI ===== */
+function updateUI(){
+  scoreDisplay.textContent = score;
+  hiDisplay.textContent = hiScore;
+  levelDisplay.textContent = level;
+}
+
+/* ===== DRAW ===== */
+function draw(){
+  if(!food || !snake || !dir) return;
+  const w = canvas.width, h = canvas.height;
+  const c = cols(), r = rows();
+
+  // Background grid
+  ctx.fillStyle = '#0E2A14';
+  ctx.fillRect(0,0,w,h);
+
+  // Subtle grid dots
+  ctx.fillStyle = 'rgba(139,214,58,.07)';
+  for(let x=0;x<c;x++) for(let y=0;y<r;y++){
+    ctx.fillRect(x*CELL + CELL/2 - 1, y*CELL + CELL/2 - 1, 2, 2);
+  }
+
+  // Food — capsule shape
+  drawCapsule(food.x, food.y);
+
+  // Snake
+  snake.forEach((seg, i) => drawSnakeSeg(seg, i));
+}
+
+function drawCapsule(gx, gy){
+  const x = gx*CELL, y = gy*CELL, s = CELL;
+  const t = Date.now() / 400;
+  const pulse = 0.5 + 0.5*Math.sin(t);
+
+  // Glow
+  const grad = ctx.createRadialGradient(x+s/2,y+s/2,2,x+s/2,y+s/2,s*0.8);
+  grad.addColorStop(0, `rgba(139,214,58,${0.3+0.2*pulse})`);
+  grad.addColorStop(1, 'rgba(139,214,58,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(x-s*0.4, y-s*0.4, s*1.8, s*1.8);
+
+  // Capsule body
+  const pad = 3;
+  const cx = x+pad, cy = y+pad, cw = s-pad*2, ch = s-pad*2;
+  const r = ch/2;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(cx, cy, cw, ch, r);
+  ctx.clip();
+
+  // Left half (dark green)
+  ctx.fillStyle = '#00710F';
+  ctx.fillRect(cx, cy, cw/2, ch);
+  // Right half (lime)
+  ctx.fillStyle = '#8BD63A';
+  ctx.fillRect(cx+cw/2, cy, cw/2, ch);
+
+  // Shine
+  ctx.fillStyle = 'rgba(255,255,255,0.22)';
+  ctx.fillRect(cx+2, cy+2, cw-4, ch*0.35);
+
+  ctx.restore();
+
+  // Border
+  ctx.beginPath();
+  ctx.roundRect(cx, cy, cw, ch, r);
+  ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // "B" label
+  ctx.fillStyle = '#fff';
+  ctx.font = `bold ${Math.floor(s*0.4)}px var(--display,'Arial Narrow',sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('B', x+s/2, y+s/2+1);
+}
+
+function drawSnakeSeg(seg, i){
+  const x = seg.x*CELL+1, y = seg.y*CELL+1, s = CELL-2;
+  const isHead = i===0;
+  const r = isHead ? 5 : 3;
+
+  // Color gradient from head to tail
+  const t = i / Math.max(snake.length-1,1);
+  const g = Math.floor(155 - t*80);
+  const color = isHead ? '#009B17' : `rgb(0,${g+20},10)`;
+
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.roundRect(x, y, s, s, r);
+  ctx.fill();
+
+  // Head shine
+  if(isHead){
+    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    ctx.beginPath();
+    ctx.roundRect(x+2, y+2, s-4, s*0.4, 2);
+    ctx.fill();
+
+    // Eyes
+    const eyeSize = 3;
+    const eyeColor = '#fff';
+    const eyeOff = dir.y === 0 ? {a:{x:s*.28,y:s*.28},b:{x:s*.28,y:s*.65}} : {a:{x:s*.28,y:s*.28},b:{x:s*.65,y:s*.28}};
+
+    ctx.fillStyle = eyeColor;
+    ctx.beginPath();
+    ctx.arc(x + eyeOff.a.x, y + eyeOff.a.y, eyeSize, 0, Math.PI*2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x + eyeOff.b.x, y + eyeOff.b.y, eyeSize, 0, Math.PI*2);
+    ctx.fill();
+
+    // Pupils
+    const px = dir.x*.5, py = dir.y*.5;
+    ctx.fillStyle = '#0E2A14';
+    ctx.beginPath();
+    ctx.arc(x + eyeOff.a.x + px, y + eyeOff.a.y + py, 1.5, 0, Math.PI*2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x + eyeOff.b.x + px, y + eyeOff.b.y + py, 1.5, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // Segment divider line
+  if(!isHead && i < snake.length-1){
+    ctx.strokeStyle = '#0E2A14';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(x, y, s, s, r);
+    ctx.stroke();
+  }
+}
+
+/* ===== CONTROLS ===== */
+document.addEventListener('keydown', e => {
+  switch(e.key){
+    case 'ArrowUp':    case 'w': case 'W': setDir(0,-1); e.preventDefault(); break;
+    case 'ArrowDown':  case 's': case 'S': setDir(0, 1); e.preventDefault(); break;
+    case 'ArrowLeft':  case 'a': case 'A': setDir(-1,0); e.preventDefault(); break;
+    case 'ArrowRight': case 'd': case 'D': setDir( 1,0); e.preventDefault(); break;
+    case ' ': case 'Enter':
+      if(!running){ startOrRestart(); } e.preventDefault(); break;
+  }
+});
+
+function setDir(x,y){
+  if(!running){ startOrRestart(); }
+  if(dir && dir.x === -x && dir.y === -y) return; // no reverse
+  nextDir = {x,y};
+}
+
+function startOrRestart(){
+  if(running) return;
+  init();
+  start();
+}
+
+document.getElementById('dUp').addEventListener('click',    ()=>setDir(0,-1));
+document.getElementById('dDown').addEventListener('click',  ()=>setDir(0, 1));
+document.getElementById('dLeft').addEventListener('click',  ()=>setDir(-1,0));
+document.getElementById('dRight').addEventListener('click', ()=>setDir( 1,0));
+
+btnPlay.addEventListener('click', startOrRestart);
+
+/* ===== SWIPE SUPPORT ===== */
+let touchStartX = 0, touchStartY = 0;
+canvas.addEventListener('touchstart', e=>{
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  e.preventDefault();
+}, {passive:false});
+canvas.addEventListener('touchend', e=>{
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if(Math.abs(dx) > Math.abs(dy)){
+    setDir(dx>0?1:-1, 0);
+  } else {
+    setDir(0, dy>0?1:-1);
+  }
+  e.preventDefault();
+}, {passive:false});
+
+/* ===== RESIZE ===== */
+window.addEventListener('resize', ()=>{
+  setCanvasSize();
+  if(!running) draw();
+});
+
+/* ===== ANIMATION LOOP for food pulse ===== */
+function animFrame(){
+  if(!running) draw(); // redraw idle for capsule animation
+  requestAnimationFrame(animFrame);
+}
+animFrame();
+
+/* ===== BOOT ===== */
+hiScore = loadHi();
+if(hiScore > 0) hiScoreMsg.textContent = `Tu récord: ${hiScore} pts`;
+init();
+overlay.classList.remove('hidden');
+</script>
+</body>
+</html>
