@@ -156,6 +156,21 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
   body{padding-bottom:76px}
   table{font-size:13.5px} th,td{padding:10px 8px} th{font-size:16px}
 }
+
+/* ---- Banner de referidos ---- */
+.ref-banner{background:var(--lime);padding:44px 20px}
+.ref-banner-in{max-width:1040px;margin:0 auto;display:grid;gap:12px;justify-items:start}
+.ref-badge{display:inline-block;background:var(--ink);color:var(--lime);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.08em;padding:4px 12px;border-radius:999px;text-transform:uppercase}
+.ref-banner h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,9vw,68px);line-height:.95;color:var(--ink);max-width:12ch}
+.ref-hl{color:var(--green-deep)}
+.ref-banner p{font-size:17px;color:var(--green-deep);max-width:44ch;font-weight:500}
+.ref-cta{display:inline-flex;align-items:center;padding:15px 26px;border-radius:999px;background:var(--ink);color:var(--lime);font-family:var(--display);font-weight:700;font-size:20px;text-decoration:none;letter-spacing:.01em;transition:background .15s,transform .15s;margin-top:4px}
+.ref-cta:hover{background:var(--green-deep);transform:translateY(-2px)}
+@media(min-width:720px){
+  .ref-banner-in{grid-template-columns:1fr auto;align-items:center;gap:24px}
+  .ref-badge,.ref-banner h2,.ref-banner p{grid-column:1}
+  .ref-cta{grid-column:2;grid-row:1/5;align-self:center;text-align:center}
+}
 </style>
 <!-- Google Analytics (mismo flujo de datos de suplementosnextgen.com) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEWPQXDYVS"></script>
@@ -218,6 +233,19 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
     <a class="ver-todas" href="/guias/" data-loc="guias_home_todas">Ver todas las guías gratuitas</a>
   </section>
 </main>
+
+
+<!-- =====================================================================
+     BANNER PROGRAMA DE REFERIDOS
+     ===================================================================== -->
+<section class="ref-banner" aria-labelledby="ref-banner-h">
+  <div class="ref-banner-in">
+    <div class="ref-badge">Nuevo</div>
+    <h2 id="ref-banner-h">Recibe <span class="ref-hl">$20.000</span> por cada amigo que compre</h2>
+    <p>Comparte tu código, tu amigo compra y tú acumulas bonos para tu próximo pedido. Hasta $40.000 por pedido.</p>
+    <a class="ref-cta" href="/referidos/" data-loc="banner_referidos">Quiero mi código de referido</a>
+  </div>
+</section>
 
 <section class="foot">
   <div class="help">
