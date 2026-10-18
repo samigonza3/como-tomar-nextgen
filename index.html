@@ -171,6 +171,22 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
   .ref-badge,.ref-banner h2,.ref-banner p{grid-column:1}
   .ref-cta{grid-column:2;grid-row:1/5;align-self:center;text-align:center}
 }
+
+/* ---- Banner de guías gratuitas ---- */
+.guias-banner{background:var(--ink);padding:52px 20px}
+.guias-banner-in{max-width:1040px;margin:0 auto;display:grid;gap:28px}
+.guias-badge{display:inline-block;background:var(--lime);color:var(--ink);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.08em;padding:4px 12px;border-radius:999px;text-transform:uppercase}
+.guias-banner-texto h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,9vw,64px);line-height:.95;color:#fff;margin-top:10px;max-width:14ch}
+.guias-banner-texto p{margin-top:12px;font-size:16px;color:#A8C9A0;max-width:48ch}
+.guias-cards-dark{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:720px){.guias-cards-dark{grid-template-columns:repeat(3,1fr)}}
+.gc-dark{display:grid;gap:6px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:16px;padding:20px 18px;text-decoration:none;color:#fff;transition:background .2s,border-color .2s}
+.gc-dark:hover{background:rgba(139,214,58,.12);border-color:var(--lime)}
+.gc-dark strong{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.05;color:#fff}
+.gc-dark span{font-size:13.5px;color:#A8C9A0;line-height:1.4}
+.gc-dark em{font-style:normal;font-size:13px;font-weight:600;color:var(--lime);margin-top:4px}
+.guias-todas{display:inline-block;font-size:14px;font-weight:600;color:var(--lime);text-underline-offset:3px;text-decoration:underline}
+.guias-todas:hover{color:#fff}
 </style>
 <!-- Google Analytics (mismo flujo de datos de suplementosnextgen.com) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEWPQXDYVS"></script>
@@ -222,18 +238,37 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
     <div id="faq"></div>
   </section>
 
-  <section class="info" id="guias" aria-labelledby="guias-h">
-    <h2 id="guias-h">Guías gratuitas</h2>
-    <p class="info-p">Información clara y con fuentes para sacarle el mejor resultado a tu producto.</p>
-    <div class="guias-grid">
-      <a class="guia-card" href="/guias/resistencia-insulina/" data-loc="guias_home"><strong>Resistencia a la insulina</strong><span>Qué es, por qué cuesta bajar de peso y un plan de 7 pasos.</span></a>
-      <a class="guia-card" href="/guias/diabetes-ereccion/" data-loc="guias_home"><strong>Diabetes y erección</strong><span>Por qué la glucosa alta la afecta y qué puedes hacer.</span></a>
-      <a class="guia-card" href="/guias/ejercicios-gluteos/" data-loc="guias_home"><strong>Ejercicios de glúteos</strong><span>Plan de 4 semanas, paso a paso.</span></a>
-    </div>
-    <a class="ver-todas" href="/guias/" data-loc="guias_home_todas">Ver todas las guías gratuitas</a>
-  </section>
 </main>
-
+<!-- =====================================================================
+     BANNER GUÍAS GRATUITAS
+     ===================================================================== -->
+<section class="guias-banner" aria-labelledby="guias-banner-h">
+  <div class="guias-banner-in">
+    <div class="guias-banner-texto">
+      <div class="guias-badge">Gratis</div>
+      <h2 id="guias-banner-h">Guías para sacarle el máximo a tu suplemento</h2>
+      <p>Información clara, con fuentes científicas, para entender mejor tu cuerpo y tu producto.</p>
+    </div>
+    <div class="guias-cards-dark">
+      <a class="gc-dark" href="/guias/resistencia-insulina/" data-loc="guias_banner">
+        <strong>Resistencia a la insulina</strong>
+        <span>Qué es, por qué cuesta bajar de peso y un plan de 7 pasos.</span>
+        <em>Leer guía →</em>
+      </a>
+      <a class="gc-dark" href="/guias/diabetes-ereccion/" data-loc="guias_banner">
+        <strong>Diabetes y erección</strong>
+        <span>Por qué la glucosa alta la afecta y qué puedes hacer.</span>
+        <em>Leer guía →</em>
+      </a>
+      <a class="gc-dark" href="/guias/ejercicios-gluteos/" data-loc="guias_banner">
+        <strong>Ejercicios de glúteos</strong>
+        <span>Plan de 4 semanas, paso a paso.</span>
+        <em>Leer guía →</em>
+      </a>
+    </div>
+    <a class="guias-todas" href="/guias/" data-loc="guias_banner_todas">Ver todas las guías gratuitas</a>
+  </div>
+</section>
 
 <!-- =====================================================================
      BANNER PROGRAMA DE REFERIDOS
